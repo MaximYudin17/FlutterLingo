@@ -1,16 +1,17 @@
-import 'question_model.dart';
+import 'question_model.dart'; 
 
 class Lesson {
-  final String id;
-  final String title;
-  final String icon;
-  final String category;
-  final int level;
-  final bool isLocked;
-  final int xpReward;
-  final String description;
-  final List<Question> questions;
+  final String id;           // Уникальный ID урока
+  final String title;        // Название урока
+  final String icon;         // Иконка 
+  final String category;     // Категория 
+  final int level;           // Уровень сложности
+  final bool isLocked;       // Доступен ли урок
+  final int xpReward;        // Награда за прохождение
+  final String description;  // Описание урока
+  final List<Question> questions; // Список вопросов
 
+  // Конструктор - создает объект урока
   Lesson({
     required this.id,
     required this.title,
@@ -23,6 +24,7 @@ class Lesson {
     required this.questions,
   });
 
+  // Фабричный конструктор - создает урок из JSON данных
   factory Lesson.fromJson(Map<String, dynamic> json) {
     return Lesson(
       id: json['id'],
@@ -33,6 +35,7 @@ class Lesson {
       isLocked: json['isLocked'],
       xpReward: json['xpReward'],
       description: json['description'],
+      // Преобразует JSON массив вопросов в список объектов Question
       questions: (json['questions'] as List)
           .map((q) => Question.fromJson(q))
           .toList(),

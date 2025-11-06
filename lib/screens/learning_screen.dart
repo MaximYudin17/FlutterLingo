@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/user_model.dart';
 import '../models/lesson_model.dart';
-import '../services/data_services.dart';
+import '../services/data_services.dart'; 
 import '../widgets/lesson_card.dart';
 import 'lesson_screen.dart';
 
@@ -10,27 +10,31 @@ class LearningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = DataService.userData;
+    final user = DataService.userData; // Данные пользователя
     
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        title: const Text('Все уроки'),
+        title: const Text('Все уроки'), // Заголовок
         backgroundColor: Colors.white,
         elevation: 1,
       ),
+      // Асинхронная загрузка уроков
       body: FutureBuilder<List<Lesson>>(
         future: DataService.loadLessons(),
         builder: (context, snapshot) {
+          // Показ индикатора загрузки
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
           
-          final lessons = snapshot.data ?? [];
+          final lessons = snapshot.data ?? []; // Все уроки
           
+          // Список всех уроков
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              // Каждый урок как карточка
               ...lessons.map((lesson) {
                 final isCompleted = user.completedLessons.contains(lesson.id);
                 return Padding(
@@ -39,6 +43,7 @@ class LearningScreen extends StatelessWidget {
                     lesson: lesson,
                     isCompleted: isCompleted,
                     onTap: () {
+                      // Переход к уроку если не заблокирован
                       if (!lesson.isLocked) {
                         Navigator.push(
                           context,

@@ -4,7 +4,7 @@ import 'screens/profile_screen.dart';
 import 'screens/learning_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp()); // Запуск приложения
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FlutterLingo',
       theme: ThemeData(
-        primaryColor: const Color(0xFF2196F3),
-        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+        primaryColor: const Color(0xFF2196F3),     // Основной синий цвет
+        scaffoldBackgroundColor: const Color(0xFFF5F5F5), // Фон приложения
       ),
-      home: const MainApp(),
-      debugShowCheckedModeBanner: false,
+      home: const MainApp(), // Главный виджет
+      debugShowCheckedModeBanner: false, // Скрыть баннер debug
     );
   }
 }
@@ -32,21 +32,24 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // Текущая выбранная вкладка
 
+  // Список экранов приложения
   final List<Widget> _screens = [
-    const HomeScreen(),
-    const LearningScreen(),
-    const ProfileScreen(),
+    const HomeScreen(),      // Главная страница
+    const LearningScreen(),  // Все уроки
+    const ProfileScreen(),   // Профиль пользователя
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],
+      body: _screens[_currentIndex], // Показываем текущий экран
+      
+      // Нижняя навигационная панель
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: _currentIndex, // Активная вкладка
+        onTap: (index) => setState(() => _currentIndex = index), // Смена экрана
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -61,8 +64,8 @@ class _MainAppState extends State<MainApp> {
             label: 'Профиль',
           ),
         ],
-        selectedItemColor: const Color(0xFF2196F3),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: const Color(0xFF2196F3), // Цвет активной вкладки
+        unselectedItemColor: Colors.grey,           // Цвет неактивных вкладок
       ),
     );
   }

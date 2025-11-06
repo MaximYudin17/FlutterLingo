@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // Информация о пользователе
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -28,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF2196F3),
                     radius: 40,
                     child: Text(
-                      user.name[0],
+                      user.name[0], // Первая буква имени
                       style: const TextStyle(
                         fontSize: 24,
                         color: Colors.white,
@@ -57,7 +58,10 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
+          
           const SizedBox(height: 16),
+          
+          // Статистика
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -81,7 +85,10 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
+          
           const SizedBox(height: 16),
+          
+          // Настройки
           Card(
             child: Column(
               children: [
