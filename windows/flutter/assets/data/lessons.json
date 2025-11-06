@@ -1,0 +1,72 @@
+{
+  "lessons": [
+    {
+      "id": "basics_1",
+      "title": "Основы 1",
+      "icon": "🔰",
+      "category": "Основы",
+      "level": 1,
+      "isLocked": false,
+      "xpReward": 10,
+      "description": "Изучите базовые слова и фразы",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Как сказать \"Hello\" на испанском?",
+          "correctAnswer": "Hola",
+          "options": ["Hola", "Adiós", "Gracias", "Por favor"],
+          "hint": "Приветствие",
+          "audioUrl": null
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Как сказать \"Goodbye\" на испанском?",
+          "correctAnswer": "Adiós",
+          "options": ["Hola", "Adiós", "Gracias", "Buenos días"],
+          "hint": "Прощание",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "id": "basics_2",
+      "title": "Основы 2",
+      "icon": "🔰",
+      "category": "Основы",
+      "level": 1,
+      "isLocked": true,
+      "xpReward": 15,
+      "description": "Больше базовых слов",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Как сказать \"Please\" на испанском?",
+          "correctAnswer": "Por favor",
+          "options": ["Hola", "Adiós", "Gracias", "Por favor"],
+          "hint": "Вежливая просьба",
+          "audioUrl": null
+        }
+      ]
+    },
+    {
+      "id": "phrases_1",
+      "title": "Фразы 1",
+      "icon": "💬",
+      "category": "Фразы",
+      "level": 2,
+      "isLocked": true,
+      "xpReward": 20,
+      "description": "Полезные повседневные фразы",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Как сказать \"How are you?\" на испанском?",
+          "correctAnswer": "¿Cómo estás?",
+          "options": ["¿Cómo estás?", "¿Qué tal?", "Bien", "Regular"],
+          "hint": "Вопрос о состоянии",
+          "audioUrl": null
+        }
+      ]
+    }
+  ]
+}

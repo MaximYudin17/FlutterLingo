@@ -1,0 +1,139 @@
+{
+  "lessons": [
+    {
+      "id": "widgets_basics",
+      "title": "Основы Widgets",
+      "icon": "🧩",
+      "category": "Widgets",
+      "level": 1,
+      "isLocked": false,
+      "xpReward": 10,
+      "description": "Изучите базовые виджеты Flutter",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Какой виджет используется для отображения текста?",
+          "correctAnswer": "Text",
+          "options": ["Text", "Container", "Row", "Column"],
+          "hint": "Этот виджет отображает строку текста"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Какой виджет выравнивает дочерние элементы по вертикали?",
+          "correctAnswer": "Column",
+          "options": ["Row", "Column", "Stack", "ListView"],
+          "hint": "Используется для вертикального расположения"
+        }
+      ]
+    },
+    {
+      "id": "state_management",
+      "title": "Управление состоянием",
+      "icon": "🔄",
+      "category": "State",
+      "level": 2,
+      "isLocked": false,
+      "xpReward": 15,
+      "description": "Изучите различные подходы к управлению состоянием",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Какой метод используется для обновления состояния в StatefulWidget?",
+          "correctAnswer": "setState",
+          "options": ["setState", "updateState", "refresh", "rebuild"],
+          "hint": "Этот метод перестраивает виджет"
+        }
+      ]
+    },
+    {
+      "id": "layout_widgets",
+      "title": "Виджеты компоновки",
+      "icon": "📐",
+      "category": "Layout",
+      "level": 1,
+      "isLocked": false,
+      "xpReward": 12,
+      "description": "Виджеты для расположения других виджетов",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Какой виджет используется для расположения виджетов в ряд?",
+          "correctAnswer": "Row",
+          "options": ["Row", "Column", "Stack", "ListView"],
+          "hint": "Располагает дочерние виджеты горизонтально"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Какой виджет позволяет накладывать виджеты друг на друга?",
+          "correctAnswer": "Stack",
+          "options": ["Stack", "Column", "Row", "Container"],
+          "hint": "Используется для overlapping элементов"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Какой виджет создает прокручиваемый список?",
+          "correctAnswer": "ListView",
+          "options": ["ListView", "Column", "Row", "GridView"],
+          "hint": "Позволяет скроллить содержимое"
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "Навигация",
+      "icon": "🧭",
+      "category": "Navigation",
+      "level": 2,
+      "isLocked": true,
+      "xpReward": 20,
+      "description": "Научитесь перемещаться между экранами",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Какой метод используется для перехода на новый экран?",
+          "correctAnswer": "Navigator.push",
+          "options": ["Navigator.push", "Router.go", "Screen.open", "Page.navigate"],
+          "hint": "Часть класса Navigator"
+        }
+      ]
+    },
+    {
+      "id": "flutter_basics",
+      "title": "Основы Flutter",
+      "icon": "🎯",
+      "category": "Basics",
+      "level": 1,
+      "isLocked": false,
+      "xpReward": 8,
+      "description": "Фундаментальные концепции Flutter",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "На каком языке программирования написан Flutter?",
+          "correctAnswer": "Dart",
+          "options": ["Dart", "Java", "Kotlin", "Swift"],
+          "hint": "Язык разработанный Google"
+        },
+        {
+          "type": "multiple_choice", 
+          "question": "Что такое Widget в Flutter?",
+          "correctAnswer": "Базовый строительный блок UI",
+          "options": [
+            "Базовый строительный блок UI",
+            "Тип базы данных",
+            "Сетевой запрос", 
+            "Файл конфигурации"
+          ],
+          "hint": "Все в Flutter является виджетом"
+        },
+        {
+          "type": "multiple_choice",
+          "question": "Какой командой создается новый Flutter проект?",
+          "correctAnswer": "flutter create",
+          "options": ["flutter create", "flutter new", "flutter start", "flutter init"],
+          "hint": "Используется в командной строке"
+        }
+      ]
+    }
+  ]
+}
