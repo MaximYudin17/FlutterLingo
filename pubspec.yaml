@@ -1,14 +1,13 @@
 name: flutterlingo
 description: "Learn Flutter with Duolingo-style app"
 
-publish_to: 'none'
-
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^13.0.0  # Добавьте эту строку
 
 dev_dependencies:
   flutter_test:

@@ -11,7 +11,7 @@ class Lesson {
   final String description;  // Описание урока
   final List<Question> questions; // Список вопросов
 
-  // Конструктор - создает объект урока
+  // Конструктор - создание объекта урока
   Lesson({
     required this.id,
     required this.title,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; 
 import '../models/user_model.dart';
 import '../services/data_services.dart';
+import '../routes.dart'; 
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,7 +21,6 @@ class ProfileScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Информация о пользователе
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -29,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF2196F3),
                     radius: 40,
                     child: Text(
-                      user.name[0], // Первая буква имени
+                      user.name[0],
                       style: const TextStyle(
                         fontSize: 24,
                         color: Colors.white,
@@ -38,22 +39,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    user.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    user.email,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
+                  Text(user.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text(user.email, style: const TextStyle(color: Colors.grey)),
                   const SizedBox(height: 8),
-                  Chip(
-                    label: Text('Уровень ${user.level}'),
-                    backgroundColor: const Color(0xFF2196F3).withOpacity(0.1),
-                  ),
+                  Chip(label: Text('Уровень ${user.level}')),
                 ],
               ),
             ),
@@ -61,17 +50,13 @@ class ProfileScreen extends StatelessWidget {
           
           const SizedBox(height: 16),
           
-          // Статистика
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Статистика',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                  const Text('Статистика', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -85,20 +70,31 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          
-          const SizedBox(height: 16),
-          
-          // Настройки
-          Card(
-            child: Column(
-              children: [
-                _buildSettingsItem(Icons.settings, 'Настройки'),
-                _buildSettingsItem(Icons.help, 'Помощь'),
-                _buildSettingsItem(Icons.info, 'О приложении'),
-              ],
-            ),
-          ),
         ],
+      ),
+      
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 2,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go(AppRoutes.home);
+              break;
+            case 1:
+              context.go(AppRoutes.learning);
+              break;
+            case 2:
+              context.go(AppRoutes.profile);
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Уроки'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
+        ],
+        selectedItemColor: const Color(0xFF2196F3),
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
@@ -111,15 +107,6 @@ class ProfileScreen extends StatelessWidget {
         Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
         Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
       ],
-    );
-  }
-
-  Widget _buildSettingsItem(IconData icon, String title) {
-    return ListTile(
-      leading: Icon(icon, color: const Color(0xFF2196F3)),
-      title: Text(title),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {},
     );
   }
 }

@@ -1,5 +1,5 @@
 class User {
-  // Поля класса - данные пользователя
+  // данные пользователя
   String name;                    // Имя пользователя
   String email;                   // Email
   int streak;                     // Дней подряд (как в Duolingo)

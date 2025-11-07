@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; 
 import '../models/user_model.dart';
 import '../models/lesson_model.dart';
-import '../services/data_services.dart'; 
+import '../services/data_services.dart';
 import '../widgets/lesson_card.dart';
-import 'lesson_screen.dart';
+import '../routes.dart'; 
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = DataService.userData; // Данные пользователя
-    final progress = user.languageProgress['widgets'] ?? 0; // Прогресс
+    final user = DataService.userData;
+    final progress = user.languageProgress['widgets'] ?? 0;
     
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
@@ -20,9 +21,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 1,
         actions: [
-          // Виджет валюты (lingots)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            margin: const EdgeInsets.only(right: 8),
             decoration: BoxDecoration(
               color: const Color(0xFF2196F3).withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
@@ -31,38 +32,70 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.diamond, color: Color(0xFF2196F3), size: 16),
                 const SizedBox(width: 4),
-                Text('${user.lingots}'), // Количество lingots
+                Text('${user.lingots}'),
               ],
             ),
           ),
         ],
       ),
-      // Загрузка уроков асинхронно
       body: FutureBuilder<List<Lesson>>(
         future: DataService.loadLessons(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator()); // Индикатор загрузки
+            return const Center(child: CircularProgressIndicator());
           }
           
-          final lessons = snapshot.data ?? []; // Уроки или пустой список
+          final lessons = snapshot.data ?? [];
           
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              _buildWelcomeSection(user),     // Приветствие
+              _buildWelcomeSection(user),
               const SizedBox(height: 20),
-              _buildProgressSection(progress), // Прогресс-бар
+              _buildProgressSection(progress),
               const SizedBox(height: 20),
-              _buildLessonsSection(lessons, user, context), // Список уроков
+              _buildLessonsSection(lessons, user, context),
             ],
           );
         },
       ),
+      
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go(AppRoutes.home);
+              break;
+            case 1:
+              context.go(AppRoutes.learning);
+              break;
+            case 2:
+              context.go(AppRoutes.profile);
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Главная',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Уроки',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Профиль',
+          ),
+        ],
+        selectedItemColor: const Color(0xFF2196F3),
+        unselectedItemColor: Colors.grey,
+      ),
     );
   }
 
-  // Приветственная секция
+  
   Widget _buildWelcomeSection(User user) {
     return Card(
       child: Padding(
@@ -73,20 +106,19 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Привет, ${user.name}!'), // Имя пользователя
+                  Text('Привет, ${user.name}!'),
                   const SizedBox(height: 4),
-                  Text('${user.streak} дней изучения Flutter'), // Дней подряд
+                  Text('${user.streak} дней изучения Flutter'),
                 ],
               ),
             ),
-            const Icon(Icons.code, color: Color(0xFF2196F3)), // Иконка
+            const Icon(Icons.code, color: Color(0xFF2196F3)),
           ],
         ),
       ),
     );
   }
 
-  // Секция прогресса
   Widget _buildProgressSection(int progress) {
     return Card(
       child: Padding(
@@ -97,26 +129,24 @@ class HomeScreen extends StatelessWidget {
             const Text('Общий прогресс по Flutter'),
             const SizedBox(height: 12),
             LinearProgressIndicator(
-              value: progress / 100, // Прогресс от 0 до 1
+              value: progress / 100,
               backgroundColor: Colors.grey[200],
               color: const Color(0xFF2196F3),
             ),
             const SizedBox(height: 8),
-            Text('$progress% завершено'), // Процент завершения
+            Text('$progress% завершено'),
           ],
         ),
       ),
     );
   }
 
-  // Секция с уроками
   Widget _buildLessonsSection(List<Lesson> lessons, User user, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('Доступные уроки'),
         const SizedBox(height: 12),
-        // Только незаблокированные уроки
         ...lessons.where((lesson) => !lesson.isLocked).map((lesson) {
           final isCompleted = user.completedLessons.contains(lesson.id);
           return Padding(
@@ -125,13 +155,10 @@ class HomeScreen extends StatelessWidget {
               lesson: lesson,
               isCompleted: isCompleted,
               onTap: () {
-                // Переход к экрану урока
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LessonScreen(lesson: lesson),
-                  ),
-                );
+                if (!lesson.isLocked) {
+                  
+                  context.push('${AppRoutes.lesson}/${lesson.id}');
+                }
               },
             ),
           );
