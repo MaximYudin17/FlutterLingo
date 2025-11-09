@@ -1,5 +1,9 @@
 name: flutterlingo
-description: "Learn Flutter with Duolingo-style app"
+description: A Flutter learning app
+
+publish_to: 'none'
+
+version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -7,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^13.0.0  # Добавьте эту строку
+  go_router: ^13.0.0
 
 dev_dependencies:
   flutter_test:
@@ -16,5 +20,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
   assets:
-    - assets/data/
+    - assets/data/lessons.json

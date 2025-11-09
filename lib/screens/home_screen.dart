@@ -4,7 +4,6 @@ import '../models/user_model.dart';
 import '../models/lesson_model.dart';
 import '../services/data_services.dart';
 import '../widgets/lesson_card.dart';
-import '../routes.dart'; 
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = DataService.userData;
-    final progress = user.languageProgress['widgets'] ?? 0;
+    final progress = user.languageProgress['Widgets'] ?? 0;
     
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
@@ -65,13 +64,13 @@ class HomeScreen extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              context.go(AppRoutes.home);
+              context.go('/home');
               break;
             case 1:
-              context.go(AppRoutes.learning);
+              context.go('/learning');
               break;
             case 2:
-              context.go(AppRoutes.profile);
+              context.go('/profile');
               break;
           }
         },
@@ -95,7 +94,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  
   Widget _buildWelcomeSection(User user) {
     return Card(
       child: Padding(
@@ -156,8 +154,7 @@ class HomeScreen extends StatelessWidget {
               isCompleted: isCompleted,
               onTap: () {
                 if (!lesson.isLocked) {
-                  
-                  context.push('${AppRoutes.lesson}/${lesson.id}');
+                  context.push('/lesson/${lesson.id}');
                 }
               },
             ),

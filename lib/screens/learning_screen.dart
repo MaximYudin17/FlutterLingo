@@ -4,7 +4,6 @@ import '../models/user_model.dart';
 import '../models/lesson_model.dart';
 import '../services/data_services.dart';
 import '../widgets/lesson_card.dart';
-import '../routes.dart'; 
 
 class LearningScreen extends StatelessWidget {
   const LearningScreen({super.key});
@@ -41,8 +40,7 @@ class LearningScreen extends StatelessWidget {
                     isCompleted: isCompleted,
                     onTap: () {
                       if (!lesson.isLocked) {
-                        
-                        context.push('${AppRoutes.lesson}/${lesson.id}');
+                        context.push('/lesson/${lesson.id}');
                       }
                     },
                   ),
@@ -58,13 +56,13 @@ class LearningScreen extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              context.go(AppRoutes.home);
+              context.go('/home');
               break;
             case 1:
-              context.go(AppRoutes.learning);
+              context.go('/learning');
               break;
             case 2:
-              context.go(AppRoutes.profile);
+              context.go('/profile');
               break;
           }
         },
