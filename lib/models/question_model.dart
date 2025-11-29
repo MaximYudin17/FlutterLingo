@@ -15,11 +15,21 @@ class Question {
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      type: json['type'],
-      question: json['question'],
-      correctAnswer: json['correctAnswer'],
-      options: List<String>.from(json['options']),
-      hint: json['hint'],
+      type: json['type'] ?? 'multiple_choice',
+      question: json['question'] ?? '',
+      correctAnswer: json['correctAnswer'] ?? '',
+      options: List<String>.from(json['options'] ?? []),
+      hint: json['hint'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type,
+      'question': question,
+      'correctAnswer': correctAnswer,
+      'options': options,
+      'hint': hint,
+    };
   }
 }

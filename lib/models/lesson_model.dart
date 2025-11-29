@@ -1,4 +1,4 @@
-import 'question_model.dart'; 
+import 'question_model.dart';
 
 class Lesson {
   final String id;
@@ -25,17 +25,31 @@ class Lesson {
 
   factory Lesson.fromJson(Map<String, dynamic> json) {
     return Lesson(
-      id: json['id'],
-      title: json['title'],
-      icon: json['icon'],
-      category: json['category'],
-      level: json['level'],
-      isLocked: json['isLocked'],
-      xpReward: json['xpReward'],
-      description: json['description'],
-      questions: (json['questions'] as List)
-          .map((q) => Question.fromJson(q))
-          .toList(),
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      icon: json['icon'] ?? '📚',
+      category: json['category'] ?? 'General',
+      level: json['level'] ?? 1,
+      isLocked: json['isLocked'] ?? true,
+      xpReward: json['xpReward'] ?? 10,
+      description: json['description'] ?? '',
+      questions: (json['questions'] as List?)
+          ?.map((q) => Question.fromJson(q))
+          .toList() ?? [],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'icon': icon,
+      'category': category,
+      'level': level,
+      'isLocked': isLocked,
+      'xpReward': xpReward,
+      'description': description,
+      'questions': questions.map((q) => q.toJson()).toList(),
+    };
   }
 }

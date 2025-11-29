@@ -3,14 +3,14 @@ import 'package:go_router/go_router.dart';
 import '../services/data_services.dart';
 import '../services/supabase_service.dart';
 
-class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+class RegScreen extends StatelessWidget {
+  const RegScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Авторизация'),
+        title: const Text('Регистрация'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -19,20 +19,15 @@ class AuthScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'FlutterLingo',
+                'Создание аккаунта',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 8),
-              const Text(
-                'Изучайте Flutter с удовольствием',
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 40),
-              _AuthForm(),
+              const SizedBox(height: 30),
+              _RegForm(),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () => context.push('/reg'),
-                child: const Text('Нет аккаунта? Зарегистрируйтесь'),
+                onPressed: () => context.go('/'),
+                child: const Text('Уже есть аккаунт? Войдите'),
               ),
             ],
           ),
@@ -42,21 +37,42 @@ class AuthScreen extends StatelessWidget {
   }
 }
 
-class _AuthForm extends StatefulWidget {
+class _RegForm extends StatefulWidget {
+  const _RegForm();
+
   @override
-  State<_AuthForm> createState() => _AuthFormState();
+  State<_RegForm> createState() => _RegFormState();
 }
 
-class _AuthFormState extends State<_AuthForm> {
+class _RegFormState extends State<_RegForm> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  
   bool _isLoading = false;
   String _errorMessage = '';
 
-  Future<void> _login() async {
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+  Future<void> _register() async {
+    if (_usernameController.text.isEmpty || 
+        _emailController.text.isEmpty || 
+        _passwordController.text.isEmpty) {
       setState(() {
         _errorMessage = 'Заполните все поля';
+      });
+      return;
+    }
+
+    if (_passwordController.text != _confirmPasswordController.text) {
+      setState(() {
+        _errorMessage = 'Пароли не совпадают';
+      });
+      return;
+    }
+
+    if (_passwordController.text.length < 6) {
+      setState(() {
+        _errorMessage = 'Пароль должен быть не менее 6 символов';
       });
       return;
     }
@@ -67,20 +83,16 @@ class _AuthFormState extends State<_AuthForm> {
     });
 
     try {
-      final response = await SupabaseService().signIn(
+      final response = await SupabaseService().signUp(
         _emailController.text.trim(),
         _passwordController.text,
+        _usernameController.text.trim(),
       );
 
       if (response['user'] != null) {
-        // Получаем профиль пользователя
-        final profile = await SupabaseService().getUserProfile(response['user']['id']);
-        final username = profile?['username'] ?? _emailController.text.split('@')[0];
+        final String userId = response['user']['id'];
+        await DataService.setUser(userId);
         
-        // Устанавливаем пользователя в DataService
-        await DataService.setUser(response['user']['id']);
-        
-        // Переходим на главную
         if (mounted) {
           context.go('/home');
         }
@@ -103,6 +115,15 @@ class _AuthFormState extends State<_AuthForm> {
     return Column(
       children: <Widget>[
         TextFormField(
+          controller: _usernameController,
+          decoration: const InputDecoration(
+            labelText: 'Имя пользователя',
+            border: OutlineInputBorder(),
+            prefixIcon: Icon(Icons.person),
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextFormField(
           controller: _emailController,
           decoration: const InputDecoration(
             labelText: 'Email',
@@ -111,8 +132,7 @@ class _AuthFormState extends State<_AuthForm> {
           ),
           keyboardType: TextInputType.emailAddress,
         ),
-        const SizedBox(height: 20),
-
+        const SizedBox(height: 16),
         TextFormField(
           controller: _passwordController,
           obscureText: true,
@@ -120,6 +140,16 @@ class _AuthFormState extends State<_AuthForm> {
             labelText: 'Пароль',
             border: OutlineInputBorder(),
             prefixIcon: Icon(Icons.lock),
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextFormField(
+          controller: _confirmPasswordController,
+          obscureText: true,
+          decoration: const InputDecoration(
+            labelText: 'Подтвердите пароль',
+            border: OutlineInputBorder(),
+            prefixIcon: Icon(Icons.lock_outline),
           ),
         ),
         
@@ -147,19 +177,18 @@ class _AuthFormState extends State<_AuthForm> {
         ],
         
         const SizedBox(height: 30),
-
         SizedBox(
           width: double.infinity,
           height: 50,
           child: _isLoading
               ? const Center(child: CircularProgressIndicator())
               : ElevatedButton(
-                  onPressed: _login,
+                  onPressed: _register,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.indigo,
+                    backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('Войти'),
+                  child: const Text('Зарегистрироваться'),
                 ),
         ),
       ],
@@ -168,8 +197,10 @@ class _AuthFormState extends State<_AuthForm> {
 
   @override
   void dispose() {
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 }

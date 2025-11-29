@@ -49,7 +49,6 @@ class LessonCard extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               children: [
-                // Новый бейдж уровня
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(

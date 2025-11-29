@@ -1,15 +1,15 @@
 class User {
-  // данные пользователя
-  String name;                    // Имя пользователя
-  String email;                   // Email
-  int streak;                     // Дней подряд (как в Duolingo)
-  int lingots;                    // Игровая валюта
-  int hearts;                     // Жизни/попытки
-  int xp;                         // Опыт
-  Map<String, int> languageProgress; // Прогресс по темам
-  List<String> completedLessons;  // Завершенные уроки
+  //данные пользователя
+  String name;                    //имя пользователя
+  String email;                   //email
+  int streak;                     //дней подряд 
+  int lingots;                    //игровая валюта
+  int hearts;                     //жизни/попытки
+  int xp;                         //опыт
+  Map<String, int> languageProgress; //прогресс по темам
+  List<String> completedLessons;  //завершенные уроки
 
-  // Конструктор - создает объект пользователя
+  //конструктор - создание объекта пользователя
   User({
     required this.name,
     required this.email,
@@ -21,6 +21,6 @@ class User {
     required this.completedLessons,
   });
 
-  // Геттер уровня - вычисляется на основе опыта
+  
   int get level => (xp / 100).floor();
 }
