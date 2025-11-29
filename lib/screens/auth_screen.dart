@@ -73,14 +73,14 @@ class _AuthFormState extends State<_AuthForm> {
       );
 
       if (response['user'] != null) {
-        // Получаем профиль пользователя
+        //получение профиля пользователя
         final profile = await SupabaseService().getUserProfile(response['user']['id']);
         final username = profile?['username'] ?? _emailController.text.split('@')[0];
         
-        // Устанавливаем пользователя в DataService
+        
         await DataService.setUser(response['user']['id']);
         
-        // Переходим на главную
+        //переход на главную
         if (mounted) {
           context.go('/home');
         }

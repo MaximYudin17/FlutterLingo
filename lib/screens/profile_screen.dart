@@ -55,14 +55,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  // Карточка профиля с рейтингом
+                  //карточка профиля с рейтингом
                   Card(
                     elevation: 2,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          // Аватар ранга
+                          //аватар ранга
                           Container(
                             width: 80,
                             height: 80,
@@ -154,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   
                   const SizedBox(height: 16),
                   
-                  // Статистика
+                  //статистика
                   Card(
                     elevation: 2,
                     child: Padding(
@@ -206,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   
                   const SizedBox(height: 16),
                   
-                  // Прогресс по категориям
+                  //прогресс по категориям
                   Card(
                     elevation: 2,
                     child: Padding(

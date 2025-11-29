@@ -68,7 +68,6 @@ class DataService {
         completedLessons: _currentUser.completedLessons,
       );
       
-      // Также сохраняем локально
       await _saveToLocalStorage(userId);
     } catch (e) {
       print('Error saving user to database: $e');

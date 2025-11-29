@@ -113,7 +113,7 @@ class _LessonScreenState extends State<LessonScreen> {
     });
   }
 
-  // Отдельный метод для сохранения прогресса в базу данных
+  //отдельный метод для сохранения прогресса в базу данных
 void _saveProgressToDatabase() async {
   final userId = await DataService.getCurrentUserId();
   if (userId != null) {
@@ -137,7 +137,7 @@ void _saveProgressToDatabase() async {
         backgroundColor: Colors.white,
         elevation: 1,
         actions: [
-          // Отображение текущего прогресса в реальном времени
+          //отображение текущего прогресса в реальном времени
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             margin: const EdgeInsets.only(right: 8),
@@ -159,7 +159,6 @@ void _saveProgressToDatabase() async {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Улучшенный прогресс-бар
             Column(
               children: [
                 LinearProgressIndicator(
@@ -202,7 +201,6 @@ void _saveProgressToDatabase() async {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Статус вопроса
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
@@ -219,7 +217,6 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 16),
           
-          // Текст вопроса
           Card(
             elevation: 2,
             child: Padding(
@@ -235,7 +232,7 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 20),
           
-          // Варианты ответов
+          //варианты ответов
           Expanded(
             child: ListView(
               children: currentQuestion.options.map((option) {
@@ -268,7 +265,7 @@ void _saveProgressToDatabase() async {
             ),
           ),
           
-          // Подсказка при ошибке
+          //подсказка при ошибке
           if (showHint)
             Container(
               width: double.infinity,
@@ -294,7 +291,7 @@ void _saveProgressToDatabase() async {
           
           if (showHint) const SizedBox(height: 16),
           
-          // Кнопки действий
+          //кнопки действий
           Row(
             children: [
               Expanded(
@@ -345,7 +342,7 @@ void _saveProgressToDatabase() async {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Иконка результата
+          //иконка результата
           Icon(
             perfectScore ? Icons.celebration : 
             goodScore ? Icons.check_circle : 
@@ -357,7 +354,7 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 20),
           
-          // Заголовок результата
+          //заголовок результата
           Text(
             perfectScore ? 'Идеальный результат! 🎯' :
             goodScore ? 'Отличная работа! 👍' :
@@ -371,7 +368,7 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 16),
           
-          // Статистика
+          //статистика
           Text(
             'Правильных ответов: $correctAnswers из ${widget.lesson.questions.length}',
             style: const TextStyle(fontSize: 16),
@@ -382,7 +379,7 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 24),
           
-          // Награды
+          //награды
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -431,7 +428,7 @@ void _saveProgressToDatabase() async {
           ),
           const SizedBox(height: 8),
           
-          // Детали расчета
+          //детали расчета
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -443,7 +440,7 @@ void _saveProgressToDatabase() async {
           
           const SizedBox(height: 32),
           
-          // Кнопка возврата
+          //кнопка возврата
           ElevatedButton(
             onPressed: () => context.go('/learning'),
             style: ElevatedButton.styleFrom(

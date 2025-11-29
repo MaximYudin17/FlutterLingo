@@ -14,7 +14,7 @@ import 'models/lesson_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Инициализация Supabase
+  //подключение supabase
   await Supabase.initialize(
     url: 'https://ukgpustuwjpcukcmuaha.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrZ3B1c3R1d2pwY3VrY211YWhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQyNjY2NjIsImV4cCI6MjA3OTg0MjY2Mn0.BEd30WgnckPdx7ptzQWRFtEJ9H808TyEWhBOO-czCcg',
